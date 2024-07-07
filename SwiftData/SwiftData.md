@@ -57,7 +57,8 @@ macro Relationship(
 `hashModifier` - Unique hash that represents the most recent version of the attached property.
 > When we define a relationship attribute as optional, SwiftData only enforces the minimumDataCount and maximumDataCount only if it is not nil.
 
-## Configure Storage
+## Model Container
+
 Use the `modelContainer` view modifier on the top level view to specify array/arrays to persist.
 
 ```swift
@@ -97,3 +98,33 @@ let container = try ModelContainer([
     Item.self
 ])
 ```
+
+## Model Configuration
+
+Provides number of options to configure - 
+- the storage exists in memory only
+- the storage is read-only
+- the app uses specific App Group for data storage
+
+> Automatic iCloud sync relies on the presence of the CloudKit entitlement, and SwiftData uses the first container it finds in that entitlement. If your app needs a particular container, use an instance of `ModelConfiguration` to specify that container.
+
+## Saving Data
+
+A model context can be accessed from a SwiftUI view by using the environment property - 
+
+```swift
+import SwiftUI
+import SwiftData
+
+struct SomeView: View {
+    @Environment(\.modelContext) private var context   
+}
+```
+
+If you are trying to access the property from somewhere else, you can get the context from the container -
+
+```swift
+var context = container.mainContext
+```
+
+The context periodically checks for unsaved changes and then saves them. If you create the context manually, set the `autoSavedEnabled` to true to get the same behavior.
