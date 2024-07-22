@@ -1,130 +1,14 @@
 # Swift Data
 > iOS 17.0+ | iPadOS 17.0+ | macOS 14.0+ | watchOS 10.0+
 
-## Basics
+### [Basics](Basics.md)
 
-Attach `@Model` to any model class to make it persistable. At build time, the macro explands to provide conformance to `PersistentModel` and `Observable`. 
+### [Attributes](Attributes.md)
 
-```swift
-@Model
-class Expense {
-    var name: String
-    var description: String
-    var amount: Int
-}
-```
+### [Relationship](Relationship.md)
 
-By default, SwiftData includes all non-computed properties of a class as long as they use compatible types. The framwork supports primitve types like `Bool`, `Int` and `String` as well as structures and enumerations as long as they conform to `Codable`.
+### [Model Container](ModelContainer.md)
 
-You can mark a property `@Transient` if you don't want to persist that property in memory.
+### [Model Configuration](ModelConfiguration.md)
 
-## Attributes
-
-```swift
-macro Attribute(
-    _ options: Schema.Attribute.Option...,
-    originalName: String? = nil,
-    hashModifier: String? = nil
-)
-```
-### Parameters
-
-`options` - List of options to apply. [Possible values](https://developer.apple.com/documentation/swiftdata/schema/attribute/option).\
-`originalName` - Previous name of the attribute.\
-`hashModifier` - Unique hash that represents the most recent version of the attached property.
-
-## Relationship
-
-```swift
-macro Relationship(
-    _ options: Schema.Relationship.Option...,
-    deleteRule: Schema.Relationship.DeleteRule = .nullify,
-    minimumModelCount: Int? = 0,
-    maximumModelCount: Int? = 0,
-    originalName: String? = nil,
-    inverse: AnyKeyPath? = nil,
-    hashModifier: String? = nil
-)
-```
-### Parameters
-
-`options` - List of options to apply.\
-`deleteRule` - Delete rule when you delete the owner. [Possible values](https://developer.apple.com/documentation/swiftdata/schema/relationship/deleterule-swift.enum).\
-`minimumModelCount` - Minimum number of models relationship can inference.\
-`maximumModelCount` - Maximum number of models relationship can inference.\
-`originalName` - Previous name of the attribute.\
-`inverse` - Keypath that represents inverse of the relationship.\
-`hashModifier` - Unique hash that represents the most recent version of the attached property.
-> When we define a relationship attribute as optional, SwiftData only enforces the minimumDataCount and maximumDataCount only if it is not nil.
-
-## Model Container
-
-Use the `modelContainer` view modifier on the top level view to specify array/arrays to persist.
-
-```swift
-func modelContainer(
-    for modelType: any PersistentModel.Type,
-    inMemory: Bool = false,
-    isAutoSaveEnabled: Bool = true,
-    isUndoEnabled: Bool = false,
-    onSetup: @escaping (Result<ModelContainer, any Error> -> Void = { _ in })
-) -> some View
-```
-### Parameters
-`modelType` - Type of model to be stored.\
-`inMemory` - Whether to store the data in memory only.\
-`onSetup` - Callback when model container creation succeeds or fails.
-
-
-> For array of models, there is another modifier with the `modelType` changing to `modelTypes` and the type being an array of `PersistentModel`.
-
-> Use `undoManager` in environment to manage undo operations.
-
-### Example
-
-```swift
-ContentView()
-    .modelContainer(for: [
-        Group.self,
-        Item.self
-    ])
-```
-
-We can also create the container manually - 
-
-```swift
-let container = try ModelContainer([
-    Group.self,
-    Item.self
-])
-```
-
-## Model Configuration
-
-Provides number of options to configure - 
-- the storage exists in memory only
-- the storage is read-only
-- the app uses specific App Group for data storage
-
-> Automatic iCloud sync relies on the presence of the CloudKit entitlement, and SwiftData uses the first container it finds in that entitlement. If your app needs a particular container, use an instance of `ModelConfiguration` to specify that container.
-
-## Saving Data
-
-A model context can be accessed from a SwiftUI view by using the environment property - 
-
-```swift
-import SwiftUI
-import SwiftData
-
-struct SomeView: View {
-    @Environment(\.modelContext) private var context   
-}
-```
-
-If you are trying to access the property from somewhere else, you can get the context from the container -
-
-```swift
-var context = container.mainContext
-```
-
-The context periodically checks for unsaved changes and then saves them. If you create the context manually, set the `autoSavedEnabled` to true to get the same behavior.
+### [Saving Data](SavingData.md)
