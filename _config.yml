@@ -19,7 +19,7 @@ title: Swift Simplified
 tagline: Simplifying Swift concepts for budding iOS Developers
 
 description: >- # used by seo meta and the atom feed
-  Swift and iOS Development concepts explained
+  Simplifying Swift concepts for budding iOS Developers
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -42,32 +42,27 @@ social:
 
 # Site Verification Settings
 webmaster_verifications:
-  google: # fill in your Google verification code
-  bing: # fill in your Bing verification code
-  alexa: # fill in your Alexa verification code
-  yandex: # fill in your Yandex verification code
-  baidu: # fill in your Baidu verification code
-  facebook: # fill in your Facebook verification code
+  google: "IKn-fUExiy0aPg8n_z-gN7E-HMQp_ZyhZ_cpv7iEPoA"
+
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-include-cache
+  - jekyll-archives
+  - jekyll-seo-tag
+
+whitelist:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache
+  - jekyll-archives
+  - jekyll-seo-tag
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
-
-# Web Analytics Settings
-analytics:
-  google:
-    id: # fill in your Google Analytics ID
-  goatcounter:
-    id: # fill in your GoatCounter ID
-  umami:
-    id: # fill in your Umami ID
-    domain: # fill in your Umami domain
-  matomo:
-    id: # fill in your Matomo ID
-    domain: # fill in your Matomo domain
-  cloudflare:
-    id: # fill in your Cloudflare Web Analytics token
-  fathom:
-    id: # fill in your Fathom Site ID
 
 # Page views settings
 pageviews:
@@ -98,7 +93,7 @@ avatar: "./assets/logo.png"
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-social_preview_image: # string, local or CORS resources
+social_preview_image: "./assets/logo.png"
 
 # boolean type, the global switch for TOC in posts.
 toc: true
