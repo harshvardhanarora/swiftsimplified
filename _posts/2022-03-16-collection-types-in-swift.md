@@ -1,17 +1,17 @@
 ---
 title: Collection Types in Swift
-description: 
+description: Explore Swift’s collection types—arrays, sets, and dictionaries—with practical examples on creation, access, modification, iteration, and set operations.
 date: 2022-03-16 00:00:00
 categories: [Swift Basics]
 tags: [swift, collection, array, set, dictionary]
 ---
 
-Swift has three primary collection types — Arrays, Sets and Dictionaries. They provide us with different ways to store similar type of data together. This article covers creating, accessing and modifying these collection type through examples in code. As usual, the promise is minimum theory and maximum code.
+Swift has three primary collection types — Arrays, Sets and Dictionaries. They provide us with different ways to store similar types of data together. This article covers creating, accessing and modifying these collection types through examples in code. As usual, the promise is minimum theory and maximum code.
 
 ---
 
 ### Arrays
-Ordered collection of values which are of same type.
+Ordered collection of values of the same type.
 
 #### Creating Arrays
 
@@ -25,10 +25,9 @@ var array3 = [3] // Array Literal
 As seen above, `array3` is created via an array literal. Swift automatically infers the type of the array to be of `Int`. You can now check the type of all the above arrays and see that they all will be the same.
 
 ```swift
-print(type(of: array0)) // Output - Array<Int>
-print(type(of: array1)) // Output - Array<Int>
-print(type(of: array2)) // Output - Array<Int>
-print(type(of: array3)) // Output - Array<Int>
+for arr in [array0, array1, array2, array3] {
+    print(type(of: arr)) // All print Array<Int>
+}
 ```
 
 You can also create an array which repeats a single number —
@@ -40,8 +39,6 @@ print(type(of: array4)) // Output - Array<Double>
 ```
 
 As you can see, the data type of the array is inferred to be `Double` because you provided a decimal number inside the `init(repeating:count:)` method.
-
-> Note that while creating the above array, you did not call `Array.init()` method. You will learn about the why in the article for Initialisation in Swift.
 
 You can also combine two arrays —
 
@@ -68,7 +65,7 @@ shoppingList += ["Pancake Mix"]
 print(shoppingList.count) // Output - 9
 ```
 
-What you need to be careful of is while using the += operator, the right hand side should contain a array with data type same as the array you are adding it to which for this case will be `Array<String>`.
+Be careful when using the `+=` operator: the right-hand side must be an array with the same element type as the array you're adding to (for this case, `[String]`).
 
 You can access and modify an element of the array using subscript syntax.
 
@@ -78,7 +75,7 @@ shoppingList[5] = "Hair Oil"
 print(shoppingList[5]) // Output - Hair Oil
 ```
 
-While accessing an element of the array, you need to be careful of the index you are trying to access. If the index does not exist in the array, it would result in a crash.
+Accessing an element with an invalid index causes a runtime crash; check `indices` or otherwise guard against out-of-bounds access.
 
 You can access and modify a range of elements as well.
 
@@ -97,7 +94,7 @@ let firstElement = shoppingList.remove(at: 0)
 print(shoppingList[0...1]) // Output - ["Maple Syrup", "Bread"]
 ```
 
-The remove method also returns back the element it removed from the array.
+The `remove(at:)` method returns the element that was removed.
 
 #### Iterating over Arrays
 
@@ -126,7 +123,7 @@ print(type(of: set0)) // Output — Set<Int>
 print(type(of: set1)) // Output — Set<Int>
 print(type(of: set2)) // Output — Set<Int>
 ```
-You cannot create Sets through literals. You need to specify the type of the Set explicitly.
+You cannot create an empty `Set` using `[]` without a type annotation; when you include values in the literal the compiler can infer a `Set` type.
 
 While creating a set from arrays, it automatically removes any duplicate values.
 
@@ -147,7 +144,7 @@ shoppingListSet.insert("Milk") // Inserting an element that already exists
 print(shoppingListSet.count) // Output - 5
 
 shoppingListSet.remove("Paint") // Output - Paint
-print(shoppingListSet.contains("Paint")) // Oupput - false
+print(shoppingListSet.contains("Paint")) // Output - false
 ```
 
 As seen from the example, the `remove()` method returns the removed value if it exists otherwise it returns `nil`.
@@ -198,9 +195,6 @@ let dict0 = Dictionary<Int, String>()
 let dict1: Dictionary<Int, String> = [:]
 let dict2: [Int: String] = [:]
 let dict3 = [1: "1"] // Dictionary Literal
-print(type(of: dict0)) // Output - Dictionary<Int, String>
-print(type(of: dict1)) // Output - Dictionary<Int, String>
-print(type(of: dict2)) // Output - Dictionary<Int, String>
 print(type(of: dict3)) // Output - Dictionary<Int, String>
 ```
 
@@ -224,7 +218,7 @@ print(numbers.count) // Output - 5
 print(numbers[5]) // Output - Optional("Five")
 ```
 
-Note: Accessing the key of a dictionary returns an optional. This ensures that the code will not crash if that key is not found. You will learn more about this in the article for Optionals in Swift.
+Note: Accessing a dictionary value by key returns an optional. This prevents crashes when a key is missing; you'll learn more about optionals in the dedicated article.
 
 Updating values —
 
