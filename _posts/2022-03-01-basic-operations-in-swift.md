@@ -1,5 +1,6 @@
 ---
 title: Basic Operations in Swift
+description: Learn the fundamentals of Swift operators and expressions in this concise guide.   Explore assignment, arithmetic, comparison, logical, and range operators, along with the ternary and nil-coalescing operators. Ideal for beginners and intermediate Swift developers looking to strengthen their understanding of basic operations in Swift.
 date: 2022-03-01 00:00:00
 categories: [Swift Basics]
 tags: [swift, operators]
