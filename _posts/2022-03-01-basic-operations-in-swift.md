@@ -4,129 +4,125 @@ date: 2022-03-01 00:00:00
 categories: [Swift Basics]
 tags: [swift]
 ---
-
 ### Terminology
 
-**Unary Operators** — Operate on Single Target. Can be prefix (!a) or postfix (a!)  
-**Binary Operators** — Operate on Two Targets. Can only be infix (a + b)  
-**Ternary Operators** — Operate on Three Targets. Only one in Swift — (a ? b : c)  
+- Unary operator — operates on a single value. Examples: prefix (-a) and postfix (a!).
+- Binary operator — operates on two values, usually written in infix position (a + b).
+- Ternary operator — combines three operands; Swift has one: the conditional operator `a ? b : c`.
 
-### Assignment Operator
+### Assignment
+
+Assignment stores a value into a variable or constant. Tuples support destructuring assignment.
 
 ```swift
 let a = 45
-let b = a
-b // 45
+let b = a // b is 45
 
 let (x, y) = (a, b)
-(x, y) // x = 45 and y = 45
+// x == 45, y == 45
 ```
-> Here, (x, y) is a compound type called **Tuple**.
 
-### Arithmetic Operators
+`(x, y)` above is a tuple — a lightweight compound value that groups multiple values.
+
+### Arithmetic operators
+
+Basic arithmetic works as expected. Integer division discards the fractional part; use floating-point types for fractional results.
 
 ```swift
-4 + 7 // 11
-5 - 3 // 2
-6 * 2 // 12
-15 / 2 // 7
-15.0 / 2 // 7.5
-15 / 2.0 // 7.5
-15.0 / 2.0 // 7.5
+4 + 7      // 11
+5 - 3      // 2
+6 * 2      // 12
+15 / 2     // 7   (integer division)
+15.0 / 2   // 7.5 (floating-point division)
 ```
 
-### Remainder Operator
+### Remainder operator
+
+The remainder (%) keeps the sign of the left-hand operand in Swift.
 
 ```swift
-9 % 4 // 1
--9 % 4 // -1
-9 % -4 // 1
+9 % 4    // 1
+-9 % 4   // -1
+9 % -4   // 1
 ```
 
-### Unary Minus Operator
+### Unary plus & minus
+
+Use unary minus to negate a number. Unary plus is allowed but usually has no effect.
 
 ```swift
 let one = 1
-let minusOne = -one // -1
-```
+let minusOne = -one   // -1
 
-### Unary Plus Operator
-
-```swift
 let two = -2
-let tryPlusTwo = +two // -2
-let plusTwo = -two // 2
+let plusTwo = -two    // 2
+let tryPlusTwo = +two // still -2
 ```
 
-### Compound Assignment Operators
+### Compound assignment
+
+Short-hand assignment operators combine an operation with assignment.
 
 ```swift
 var num = 5
-num = num + 2 //7
-num += 2 // 9
-num *= 5 // 45
-num /= 3 // 15
+num = num + 2 // 7
+num += 2      // 9
+num *= 5      // 45
+num /= 3      // 15
 ```
 
-### Comparison Operators
+### Comparison operators
+
+Standard comparisons return `Bool`.
 
 ```swift
-
 let num1 = 12
 let num2 = 15
-num1 > num2 // false
-num1 >= num2 // false
-num1 == num2 // false
-num1 <= num2 // true
-num1 < num2 // true
+num1 > num2   // false
+num1 >= num2  // false
+num1 == num2  // false
+num1 <= num2  // true
+num1 < num2   // true
+```
 
-/*
- Compare Strings
- Compares characters from left to right till first inequality if found which decides the result of the comparison
- Only equal if all characters are equal
-*/
+Strings are compared lexicographically (left-to-right) and comparisons are case-sensitive by default. To perform case-insensitive comparisons, normalize both sides first:
 
-"Hello" > "Helmet" // false because Hello appears before Helmet in a dictionary
-"Apple" > "Ant" // true because Ant appears before Apple in a dictionary
-"Banana" == "Banana" // true because both strings are equal
+```swift
+"b" > "C"                           // true (case-sensitive)
+"b".uppercased() > "C".uppercased() // false (compare same case)
+"Apple" > "Ant"                     // true (p > n)
+"Hello" > "Helmet"                  // false (m > l)
+```
 
-"b" > "C" // Even though b appears before C in a dictionary, this statement is true
-"b".uppercased() > "C".uppercased() // That's why it is better to compare strings after converting them both to uppercase or lowercase
+Tuples of the same type and arity can be compared element-wise from left to right.
 
-/*
- Compare Tuples
- Can compare tuples if they have same type and same number of values
- Compares elements from left to right till first inequality is found which then decides the result of the comparison
- Only equal if all elements are equal
-*/
-
+```swift
 let tuple1 = (5, "Train")
 let tuple2 = (5, "Plane")
 let tuple3 = (9, "Apple")
 let tuple4 = (5, "Train")
 
-tuple1 > tuple2 // true
-tuple3 > tuple2 // true
+tuple1 > tuple2  // true ("Train" > "Plane")
+tuple3 > tuple2  // true (9 > 5)
 tuple4 == tuple1 // true
 ```
 
-### Ternary Conditional Operator
+### Ternary conditional operator
 
-> question ? answerIfTrue : answerIfFalse  
-> The type of answerIfTrue and answerIfFalse should be the same as the expected return type.
+The ternary operator is a compact form of an `if` that returns one of two values.
 
 ```swift
-let passed: Bool
 let marks = 74
-passed = marks >= 50 ? true : false // true because marks >= 50
-passed = marks >= 50 ? "Pass" : "Fail" // Error as we returned a String from the operator when a Boolean was expected
+let passed = marks >= 50 ? true : false
+// prefer the simpler form when returning Bools
+let passedSimple = marks >= 50
 ```
 
-### Nil-Coalescing Operator
+Avoid returning values of different types from the two branches; they must share the same type.
 
-> a ?? b — Unwraps an optional a if it contains a value or returns b.  
-> a should be an optional and b should not while matching the type of a.  
-> Equivalent of a != nil ? a! ? b  
+### Nil-coalescing operator
+
+`a ?? b` unwraps optional `a` if it has a value, otherwise returns `b`. The result is non-optional.
 
 ```swift
 let optional1: Int? = nil
@@ -135,67 +131,40 @@ let notOptional = 12
 
 let result1 = optional1 ?? notOptional // 12
 let result2 = optional2 ?? notOptional // 5
-// The type of result1 and result2 is now Int and not Int?
+// result1 and result2 are Int (not Int?)
 ```
 
-### Range Operators
+### Range operators
 
-> For a…b (Closed Range) and a..<b (Open Range), a <= b
+Swift has closed (`a...b`), half-open (`a..<b`) and one-sided ranges (`a...` or `...b`).
 
 ```swift
-// Closed Range Operator
+let closed = 5...10
+for i in closed { print(i, terminator: " ") } // 5 6 7 8 9 10
 
-let closeRange = 5...10
-for index in closeRange {
-    print(index, terminator: " ") // 5 6 7 8 9 10
-}
-
-print("") // Only to shift to next line in console
-
-// Half Open Range Operator
-
-let openRange = 5..<10
-for index in openRange {
-    print(index, terminator: " ") // 5 6 7 8 9
-}
-
-print("") // Only to shift to next line in console
-
-// One Sided Range
+let halfOpen = 5..<10
+for i in halfOpen { print(i, terminator: " ") } // 5 6 7 8 9
 
 let array = ["A", "B", "C", "D", "E"]
-for alphabets in array[0...] {
-    print(alphabets, terminator: " ") // A B C D E
-}
+for letter in array[0...] { print(letter, terminator: " ") } // A B C D E
 ```
 
-### Logical Operators
+### Logical operators
+
+Logical operators work on Booleans: NOT (`!`), AND (`&&`) and OR (`||`). Use parentheses to make complex expressions explicit.
 
 ```swift
-// NOT
-
 let trueValue = true
-!trueValue // false
-
-// AND
-
-let anotherTrueValue = true
 let falseValue = false
-trueValue && anotherTrueValue // true
-trueValue && falseValue // false
 
-// OR
+!trueValue               // false
+trueValue && true        // true
+trueValue || falseValue  // true
 
-trueValue || anotherTrueValue // true
-trueValue || falseValue // true
-
-// Combining Logical Operators
-
-trueValue && anotherTrueValue && falseValue // false
-trueValue && anotherTrueValue || falseValue // true
-
-// Explicit Paranthesis Usage
-
-trueValue && !anotherTrueValue && falseValue // false
-trueValue && !(anotherTrueValue && falseValue) // true
+// Combined with parentheses for clarity
+trueValue && !(falseValue || false)
 ```
+
+---
+
+Producing and maintaining these guides takes time and resources. If you found this article helpful and would like to support future content, consider a small contribution via [Buy Me a Coffee](https://buymeacoffee.com/swiftsimplified). Contributions help cover hosting and creation costs and make it possible to keep publishing free, practical material. No pressure — sharing this post with your network or starring the project is equally appreciated. Thank you for reading.
