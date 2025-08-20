@@ -195,6 +195,9 @@ let dict0 = Dictionary<Int, String>()
 let dict1: Dictionary<Int, String> = [:]
 let dict2: [Int: String] = [:]
 let dict3 = [1: "1"] // Dictionary Literal
+print(type(of: dict0)) // Output - Dictionary<Int, String>
+print(type(of: dict1)) // Output - Dictionary<Int, String>
+print(type(of: dict2)) // Output - Dictionary<Int, String>
 print(type(of: dict3)) // Output - Dictionary<Int, String>
 ```
 
