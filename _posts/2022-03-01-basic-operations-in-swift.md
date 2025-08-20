@@ -4,7 +4,7 @@ description: Learn the fundamentals of Swift operators and expressions in this c
 
 date: 2022-03-01 00:00:00
 categories: [Swift Basics]
-tags: [swift]
+tags: [swift, operators]
 ---
 ### Terminology
 
