@@ -5,197 +5,174 @@ date: 2022-03-12 00:00:00
 categories: [Swift Basics]
 tags: [swift, strings]
 ---
+Strings are sequences of user-perceived characters represented by the `String` type in Swift. This article explains string and character basics with small, copy-friendly examples.
 
-Strings are series of characters represented by the String type in Swift. This article will cover different ways to play around with Strings and Characters in Swift.
+### String literals
 
-### String Literals
+Single-line string literals are written with double quotes. Use triple quotes for multi-line literals. Indentation rules are available to trim leading whitespace in multi-line strings.
 
 ```swift
 let stringLiteral = "This is a string literal"
-// Type of stringLiteral is inferred as String
 
 let multiLineLiteral = """
-    We can also have multi-line string literals.
-    This line break will also appear in string's value.
-    We can also chose to not have a line break using \
-    which allows us to organise a string in a better way.
-        The space behind the closing marks tells Swift to ignore that for all lines.
-    """
+We can write multi-line strings.
+Line breaks inside the triple quotes are preserved.
+"""
 ```
-### Initialising empty String
+
+### Empty strings
+
+You can create an empty string using a literal or the `String` initializer:
 
 ```swift
-let emptyStringLiteral = "" // Output - ""
-let emptyString = String()  // Output - ""
+let emptyLiteral = ""
+let emptyString = String()
 ```
 
-### String Mutability
+### Mutability
+
+Use `var` for strings you plan to modify and `let` for constants.
 
 ```swift
 var firstName = "Max"
 let lastName = "Verstappen"
 firstName += " " + lastName
-// Output - Max Verstappen
-
-lastName = firstName + lastName
-// Throws an error because lastName is a constant
-
-let multiLineString = """
-    A
-    B
-    """
-// Include a line space in multi-line strings to create a line break
-let characterC: Character = "C"
-// Character does not have string literal
-print(multiLineString + String(characterC))
-/*
-Output -
-A
-B
-C
-*/
 ```
 
-The important thing to note here is that inside multi-line strings, we need to manually insert a blank line to create a line break. Without that the output would have looked like -
+The example above appends the last name to `firstName`. Attempting the same assignment to a `let` constant would cause a compile-time error.
 
-```
-A
-BC
-```
-
-### Iterating over Strings
+Multiline string example and combining with a `Character`:
 
 ```swift
-let driver = "Lewis Hamilton"
-for character in driver {
-print(character, terminator: " ")
-// Output - L e w i s  H a m i l t o n
+let multiLine = """
+A
+B
+"""
+let char: Character = "C"
+let combined = multiLine + String(char)
+```
+
+The `combined` string now contains the three lines with `C` appended on a new line.
+
+### Iterating over characters
+
+Iterate a string to access its `Character` values:
+
+```swift
+for ch in "Swift" {
+    print(ch)
 }
 ```
 
-By default, each print statement includes a line break at the end. By using terminator argument, we can specify our own custom end string for each print statement. Here we chose to insert a blank space after each print statement.
+Each loop iteration yields a `Character` (a user-perceived character), which may consist of one or more Unicode scalars.
 
-### String Interpolation
+### String interpolation
+
+Insert values into strings using `\( )`:
 
 ```swift
 let points = 395.5
-let statement = "Max Verstappen accumulated \(points) points in the F1 2021 season"
+let statement = "Max Verstappen accumulated \(points) points"
 ```
 
-### Unicode and Extended Grapheme Clusters
+### Unicode and extended grapheme clusters
 
-Now even though I try to keep my tutorials mostly code, sometimes a little theory can be crucial to understand some key concepts. So bear with me for just a minute!
-
-> Every **Character** instance represents a single **extended grapheme cluster**.
-
-Every extended grapheme cluster is made up of one or more unicode scalar values to form a human-readable character. An example of this is, the letter é can be written through a single unicode scalar or a combination of two unicode scalars.
+Each `Character` represents an extended grapheme cluster — one or more Unicode scalars that form a single user-perceived character. For example, "é" can be a single scalar (`\u{E9}`) or `e` plus a combining accent (`\u{65}\u{301}`); they are considered canonically equivalent.
 
 ```swift
-let acuteE: Character = "\u{E9}"          // Output - é
-let combineE: Character = "\u{65}\u{301}" // Output - é
+let acuteE: Character = "\u{E9}"
+let combinedE: Character = "\u{65}\u{301}"
 ```
-The **count** of a string is calculated by the number of extended grapheme clusters it is composed of and not unicode scalars. What this implies is that when we concatenate strings, the count of the final string will **not always** be equal to the sum of counts of member strings.
+
+The two `Character` values above compare as equal because they represent the same grapheme cluster.
+
+Note: `String.count` counts extended grapheme clusters (user-perceived characters), not Unicode scalars or bytes.
 
 ```swift
 var cafe = "cafe"
-print(cafe) // Output - 4
-cafe += "\u{301}" // Output - café
-print(cafe) // Output - 4
+cafe.count
+cafe += "\u{301}"
+cafe.count
 ```
 
-As we see here, going from cafe to café the count of characters remained 4.
-Alright that’s enough theory, hope you got the gist of it. Let’s move on!
+Here, `cafe.count` remains 4 after appending the combining accent because the result is still four user-perceived characters: `c`, `a`, `f`, `é`.
 
-### Accessing a String
+### Accessing characters and indexes
+
+Swift strings use `String.Index` instead of integer offsets because of variable-width Unicode characters.
 
 ```swift
-let helloWorld = "Hello World!"
-var startIndex = helloWorld.startIndex
-print(helloWorld[startIndex])
-// Output - H
+let s = "Hello World!"
+let start = s.startIndex
+let first = s[start]
+let fifth = s[s.index(start, offsetBy: 4)]
+```
 
-var endIndex = helloWorld.endIndex
-// print(helloWorld[endIndex])
-// Throws an error because the endIndex is after the last character
+In the example above `first` is "H" and `fifth` is "o". Note that `s.endIndex` represents the position after the last character and cannot be subscripted directly.
 
-endIndex = helloWorld.index(before: endIndex)
-print(helloWorld[endIndex])
-// Output - !
+To iterate by index:
 
-let fifthIndex = helloWorld.index(startIndex, offsetBy: 4)
-print(helloWorld[fifthIndex])
-// Output - o
-
-for index in helloWorld.indices {
-    print(helloWorld[index], terminator: "")
+```swift
+for idx in s.indices {
+    print(s[idx], terminator: "")
 }
 ```
 
-### Modifying a String
+### Modifying strings
+
+You can insert, append, and remove characters or ranges using the `String` API.
 
 ```swift
-var hello = "Hello"
-
-hello.insert("!", at: hello.endIndex)
-print(hello)
-// Output - Hello!
-
-hello.insert(contentsOf: " World", at: hello.index(hello.startIndex, offsetBy: 5))
-print(hello)
-// Output - Hello World!
-
-hello.remove(at: hello.index(before: hello.endIndex))
-print(hello)
-// Output - Hello World
-
-let range = hello.startIndex...hello.index(hello.startIndex, offsetBy: 5)
-hello.removeSubrange(range)
-print(hello)
-// Output - World
+var t = "Hello"
+t.insert("!", at: t.endIndex)
+t.insert(contentsOf: " World", at: t.index(t.startIndex, offsetBy: 5))
+t.remove(at: t.index(before: t.endIndex))
 ```
 
-### Substring
+After these operations `t` becomes first "Hello!", then "Hello World!", and finally "Hello World" after removing the trailing exclamation mark.
+
+### Substrings
+
+Ranges of a `String` produce `Substring` (a `String.SubSequence`) which can share storage with the original string. Convert to `String` when you need an independent copy.
 
 ```swift
-let helloWorldAgain = "Hello, World!"
-let helloIndex = helloWorldAgain.firstIndex(of: ",") ?? helloWorldAgain.endIndex
-let helloSubstring = helloWorldAgain[..<helloIndex]
-// Output - Hello
+let hw = "Hello, World!"
+let idx = hw.firstIndex(of: ",") ?? hw.endIndex
+let sub = hw[..<idx]
+let helloString = String(sub)
 ```
 
-When you create a substring like above, it is of type String.Subsequence. As a performance optimisation, a substring can reuse part of memory that’s used to store the original string (until the string or substring is changed). That’s why it is recommended to use substring only for a shorter scope. Otherwise, you can create a separate string from it —
+`sub` is a `Substring` view into `hw` containing "Hello"; `helloString` converts it to an owned `String`.
 
-`let helloString = String(helloSubstring)`
+### Comparing strings
 
-### Comparing Strings
-
-An extended grapheme cluster can be formed using different combinations of unicode scalars. Two strings are considered equal if their extended grapheme clusters are **canonically equivalent** (same linguistic meaning and appearance). Therefore, café written through the below combinations will be the same,
+String equality compares canonical equivalence of grapheme clusters.
 
 ```swift
-let acuteLatte = "Latt\u{E9}"
-let combinedLatte = "Latt\u{65}\u{301}"
-print(acuteLatte == combinedLatte)
-// Output - True
+let a = "Latt\u{E9}"
+let b = "Latt\u{65}\u{301}"
 ```
 
-but the alphabet a in Latin and Russian will be differnt.
+The two strings above are considered equal because they represent the same user-perceived characters.
+
+Be aware that characters from different scripts (Latin vs Cyrillic) are distinct even if they look similar:
 
 ```swift
-let latinCapitalLetterA: Character = "\u{41}"
-let cyrillicCapitalLetterA: Character = "\u{0410}"
-print(latinCapitalLetterA == cyrillicCapitalLetterA)
-// Output - False
+let latinA: Character = "\u{41}"
+let cyrillicA: Character = "\u{0410}"
 ```
 
-We can also compare using `hasPrefix(_:)` and `hasSuffix(_:)`.
+`latinA == cyrillicA` is `false` — the code points are different.
+
+Use `hasPrefix(_:)` and `hasSuffix(_:)` for common prefix/suffix checks.
 
 ```swift
-let ferrariDriver = "Charles Leclerc"
-print(ferrariDriver.hasPrefix("Charles"))
-// Output - True
-print(ferrariDriver.hasSuffix(" Leclerc"))
-// Output - True
+let name = "Charles Leclerc"
+name.hasPrefix("Charles")
+name.hasSuffix("Leclerc")
 ```
+
+These return `true` for the example above.
 
 ---
 
