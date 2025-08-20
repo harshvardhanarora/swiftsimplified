@@ -2,7 +2,7 @@
 title: Basic Operations in Swift
 date: 2022-03-01 00:00:00
 categories: [Swift Basics]
-tags: [swift]
+tags: [swift, operators]
 ---
 ### Terminology
 
