@@ -91,7 +91,7 @@ Strings are compared lexicographically (left-to-right) and comparisons are case-
 "b" > "C"                           // true (case-sensitive)
 "b".uppercased() > "C".uppercased() // false (compare same case)
 "Apple" > "Ant"                     // true (p > n)
-"Hello" > "Helmet"                  // false (m > l)
+"Hello" > "Helmet"                  // false (l < m)
 ```
 
 Tuples of the same type and arity can be compared element-wise from left to right.
