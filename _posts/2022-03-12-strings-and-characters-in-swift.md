@@ -1,6 +1,6 @@
 ---
 title: Strings and Characters in Swift
-description: Master string and character handling in Swift with this practical guide covering literals, mutability, interpolation, Unicode, grapheme clusters, indexing, modification, substrings, and comparison techniques.
+description: Practical guide to Swift strings and characters - literals, mutability, interpolation, Unicode and grapheme clusters, indexing, substrings, and comparison techniques with copy-friendly examples.
 date: 2022-03-12 00:00:00
 categories: [Swift Basics]
 tags: [swift, strings]

@@ -1,12 +1,11 @@
 ---
 title: Collection Types in Swift
-description: Explore Swift’s collection types—arrays, sets, and dictionaries—with practical examples on creation, access, modification, iteration, and set operations.
+description: Explore Swift’s primary collection types—arrays, sets, and dictionaries—with practical, copy-friendly examples for creation, access, modification, iteration and set operations.
 date: 2022-03-16 00:00:00
 categories: [Swift Basics]
-tags: [swift, collection, array, set, dictionary]
+tags: [swift, collection]
 ---
-
-Swift has three primary collection types — Arrays, Sets and Dictionaries. They provide us with different ways to store similar types of data together. This article covers creating, accessing and modifying these collection types through examples in code. As usual, the promise is minimum theory and maximum code.
+Swift has three primary collection types — Arrays, Sets and Dictionaries. They provide different ways to store multiple values of the same type. This article focuses on hands-on examples for creating, accessing and modifying these collections with minimal theory.
 
 ---
 
@@ -195,6 +194,9 @@ let dict0 = Dictionary<Int, String>()
 let dict1: Dictionary<Int, String> = [:]
 let dict2: [Int: String] = [:]
 let dict3 = [1: "1"] // Dictionary Literal
+print(type(of: dict0)) // Output - Dictionary<Int, String>
+print(type(of: dict1)) // Output - Dictionary<Int, String>
+print(type(of: dict2)) // Output - Dictionary<Int, String>
 print(type(of: dict3)) // Output - Dictionary<Int, String>
 ```
 
