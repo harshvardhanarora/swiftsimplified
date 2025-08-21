@@ -1,10 +1,10 @@
 ---
 title: Thread Safety with Subjects in RxSwift
-description: 
+description: Practical explanation of scheduler behaviour and thread-safety when using RxSwift Subjects, with examples and safe patterns for updating subjects from multiple threads.
 date: 2022-03-27 00:00:00
 tags: [swift, rxswift]
 ---
-On which thread does your RxSwift chain execute its code? How do you perform costly operations without blocking the main thread? What happens if multiple threads try to update your subject at the same time? Let’s dive into answering these questions. 
+On which thread does your RxSwift chain execute its code? How do you perform costly operations without blocking the main thread? What happens if multiple threads try to update your subject at the same time? Let's dive into these questions.
 
 #### Which thread does an RxSwift chain perform its code?
 

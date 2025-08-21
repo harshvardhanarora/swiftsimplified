@@ -1,6 +1,6 @@
 ---
 title: Opaque Result Types in Swift
-description: 
+description: Understand Swift's opaque result types (some Type) - purpose, how they hide concrete types while preserving API flexibility, and practical examples.
 date: 2025-05-02 00:00:00
 categories: [Swift Generics]
 tags: [swift, generics]

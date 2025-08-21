@@ -1,9 +1,9 @@
 ---
 title: Methods in Swift
-description: 
+description: Clear guide to Swift methods - instance and type methods, mutating methods on value types, method signatures, and practical usage patterns.
 date: 2022-06-12 00:00:00
 categories: [Swift Basics]
-tags: [swift, methods]
+tags: [swift]
 ---
 You’ve learnt about **functions**, and you’ve learnt about data types like **structs**, **classes** and **enums**. Methods are simply functions that are associated with a type. Similar to properties, we can have instance methods and type methods.
 

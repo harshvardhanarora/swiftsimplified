@@ -1,9 +1,9 @@
 ---
 title: Structures and Classes in Swift
-description: 
+description: Practical comparison of Swift structures and classes - initialization, stored vs computed properties, value vs reference semantics, and common usage patterns.
 date: 2022-05-15 00:00:00
 categories: [Swift Basics]
-tags: [swift, struct, class]
+tags: [swift, oop]
 ---
 Structures and Classes make the building blocks of your program. They’re capable of storing data and functionality in the form of constants, variables and functions. This articles covers a broad range of topics from understanding what are structs and classes and why do we need them, how to create them, how to add data and functionality and how to access that data and functionality. Let’s go!
 

@@ -1,6 +1,6 @@
 ---
 title: Closures in Swift
-description: 
+description: Hands-on guide to Swift closures - syntax, shorthand forms, trailing closures, capturing values, escaping and autoclosures with practical examples.
 date: 2022-04-13 00:00:00
 categories: [Swift Basics]
 tags: [swift, closures]

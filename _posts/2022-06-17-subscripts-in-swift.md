@@ -1,6 +1,6 @@
 ---
 title: Subscripts in Swift
-description: 
+description: How to implement subscripts in Swift types - read-only and read-write subscripts, multiple parameters, overloading, and type subscripts with examples.
 date: 2022-06-17 00:00:00
 categories: [Swift Basics]
 tags: [swift, subscripts]
@@ -9,7 +9,7 @@ How do you access an element of an array?
 
 `let element = array[5]`
 
-The above property `element` is set to the **sixth** element from the array. But what does the `“[5]”` here mean? We’ve also noticed this in dictionary where we access the **value** using a **key**. Is it something we can define for a type? That’s what we will find out in today’s article!
+The above property `element` is the **sixth** element from the array. But what does the `[5]` mean? We’ve also seen this on dictionaries where we access a value using a key. Is this syntax something we can define for our own types? That’s what we’ll explore in this article.
 
 ---
 

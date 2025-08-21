@@ -1,9 +1,9 @@
 ---
 title: Control Flow in Swift
-description: 
+description: Practical guide to Swift control flow - for-in, while, repeat-while, if-else, switch, guard, break and continue with clear examples and common patterns.
 date: 2022-03-22 00:00:00
 categories: [Swift Basics]
-tags: [swift]
+tags: [swift, control-flow]
 ---
 Switch statements in Swift are very powerful and will be covered extensively in this tutorial. We will also look at other control flow statements like for-in, while, if, guard, break and continue.
 
@@ -29,7 +29,7 @@ for (number, name) in nameForNumber {
 }
 ```
 
-We can also chose to iterate over only keys or values of a dictionary as well.
+We can also choose to iterate over only keys or values of a dictionary.
 
 ```swift
 for number in nameForNumber.keys {
@@ -42,7 +42,7 @@ for name in nameForNumber.values {
 
 ### While
 
-While loops is used to perform a set of statements until a stopping condition is reached.
+A while loop is used to perform a set of statements until a stopping condition is reached.
 
 ```swift
 var startNumber = 10
@@ -55,7 +55,7 @@ print(startNumber) // Output - 46
 
 What this loop does is, that it keeps on adding the integer `6` to the `startNumber` till it is lower than `maxNumber`. Important thing to note here is that the final value of `startNumber` is `46` which is greater than the `maxNumber`. This happens because in the last iteration of our loop, the value of `startNumber` would have been `40` which was still lower than `maxNumber` because of which the statement inside the while loop was executed.
 
-If we wanted it to stop at `40`, we would need to use the break which we will look at soon.
+If we wanted it to stop at `40`, we would need to use `break`, which we will look at soon.
 
 ### Repeat-While
 
@@ -274,11 +274,11 @@ Now we will go line by line to understand what the above code does —
 8 — Moves on to next iteration of sumLoop if value of roll is 7
 9 — Stops both the switch statement and the sumLoop if value is 10
 
-This might take a bit of time to digest, and that is okay. Try this out in your playground and keep trying to change thins here and there to understand it better.
+This might take a bit of time to digest, and that is okay. Try this out in your playground and keep experimenting to understand it better.
 
 ### Guard
 
-Now lastly, we will cover the guard statement. It is very similar to an if statement the only difference being we use guard when the condition must be true for the code to move forward.
+Now lastly, we will cover the `guard` statement. It is similar to an `if` statement; the difference is `guard` is used when a condition must be true for execution to continue.
 
 ```swift
 let driverNumForName = ["Max": 1, "Charles": 16, "Lewos": 44, "Lando": 4, "George": 63]

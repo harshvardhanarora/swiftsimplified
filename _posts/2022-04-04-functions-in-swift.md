@@ -1,6 +1,6 @@
 ---
 title: Functions in Swift
-description: 
+description: Practical guide to Swift functions - declarations, parameters, return types, inout, overloading, function types and higher-order functions with clear examples.
 date: 2022-04-04 00:00:00
 categories: [Swift Basics]
 tags: [swift, functions]

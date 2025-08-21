@@ -1,6 +1,6 @@
 ---
 title: Properties in Swift
-description: 
+description: Practical overview of Swift properties - stored, computed, lazy, property observers, and access control with concise examples.
 date: 2022-05-30 00:00:00
 categories: [Swift Basics]
 tags: [swift, properties]

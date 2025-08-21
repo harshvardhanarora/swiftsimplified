@@ -1,11 +1,11 @@
 ---
 title: Enumerations in Swift
-description: 
+description: Learn Swift enums - defining cases, associated values, raw values, iteration, pattern matching, and conformance to protocols with practical examples.
 date: 2022-05-08 00:00:00
 categories: [Swift Basics]
-tags: [swift, enums]
+tags: [swift, enums, pattern-matching]
 ---
-Enumerations in Swift allow you to group related values under a common type which enables us to write type-safe code.
+Enumerations in Swift allow you to group related values under a common type, enabling more type-safe code.
 
 **Common Questions —**
 - How to create Enums?
@@ -30,7 +30,7 @@ enum Color {
 }
 ```
 
-You just created an enum called `Colors`. Inside your enum, you create `cases` that are the possible values your enum can take. In this example, we create 5 difference cases for different colors. You can create as many as you need!
+You just created an enum called `Color`. Inside your enum, you create `cases` that are the possible values your enum can take. In this example, we create five cases for different colors. You can create as many as you need.
 
 > Notice how we name the enum `Color` and not `Colors`. This is done intentionally keeping in mind that a value of this type can only be set to a single case.
 
