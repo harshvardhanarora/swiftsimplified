@@ -28,11 +28,10 @@ Now we will try to create an instance of this class —
 ```swift
 let cat = Pet()
 print(cat.description)
-title: Inheritance in Swift
-description: Learn class inheritance in Swift: creating base and derived classes, method/property overriding, initialiser rules, and using final to prevent overrides.
-date: 2022-06-22 00:00:00
-categories: [Swift Basics]
-tags: [swift]
+// Output - My name is Margo
+```
+
+Notice we did not need to create an **initialiser** method for our class because there were no properties that needed initialisation.
 
 This class does not inherit from any classes, but other classes can inherit from it and override the properties and methods that we have here. Let’s see how!
 

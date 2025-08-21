@@ -205,8 +205,8 @@ compute(
 Looks amazing doesn’t it? One final thing, let’s see how trailing closures look in action when we have multiple trailing closure arguments —
 
 ```swift
-compute(num: 5) { "\(num) number is even" }
-    ifOdd: { "\(num) number is odd" }
+compute(num: 5) { "\($0) number is even" }
+    ifOdd: { "\($0) number is odd" }
 ```
 
 In case of multiple closure arguments, we write the first one as we would normally write a trailing closure. But for the second closure, we would first write the argument label and then write the closure body itself as seen above.
@@ -246,7 +246,7 @@ Let’s see how this function would look like in action —
 
 ```swift
 var finalGrades: [String] = []
-let gradeList = gradeListCompure()
+let gradeList = gradeListCompute()
 
 for mark in marks {
     finalGrades = gradeList(mark)
@@ -319,7 +319,7 @@ Here we pass in a closure to a function which then executes that closure. Simple
 Let’s see how we could do this with an auto closure —
 
 ```swift
-func performAutuClosure(closure: @autoclosure () -> Void) {
+func performAutoClosure(closure: @autoclosure () -> Void) {
     closure()
 }
 

@@ -23,7 +23,7 @@ for name in names {
 #### Iterating over a Dictionary 
 
 ```swift
-let nameForNumber = [1: "Max", 16: "Charles", 44: "Lewos", 4: "Lando", 63: "George"]
+let nameForNumber = [1: "Max", 16: "Charles", 44: "Lewis", 4: "Lando", 63: "George"]
 for (number, name) in nameForNumber {
     print("Number for \(name) is \(number)")
 }
@@ -281,7 +281,7 @@ This might take a bit of time to digest, and that is okay. Try this out in your 
 Now lastly, we will cover the `guard` statement. It is similar to an `if` statement; the difference is `guard` is used when a condition must be true for execution to continue.
 
 ```swift
-let driverNumForName = ["Max": 1, "Charles": 16, "Lewos": 44, "Lando": 4, "George": 63]
+let driverNumForName = ["Max": 1, "Charles": 16, "Lewis": 44, "Lando": 4, "George": 63]
 
 func findDriverNumber(for name: String) {
     guard let number = driverNumForName[name] else {

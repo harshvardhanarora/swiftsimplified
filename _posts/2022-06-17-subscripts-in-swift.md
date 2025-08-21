@@ -108,7 +108,7 @@ Add the above subscript to your code and do nothing else. You will see that the 
 
 If you go through the code carefully, you will understand that now there are two subscripts that take String as a parameter but they return Int and String. When you try to print the output of that subscript, Swift does not know which subscript you are referring to. Thus it throws the ambiguous use error —
 
-> Ambigious use of 'subscript(_:)'
+> Ambiguous use of 'subscript(_:)'
 {: .prompt-danger}
 
 We can resolve this by explicitly specifying what we are expecting as a result from the subscript —
