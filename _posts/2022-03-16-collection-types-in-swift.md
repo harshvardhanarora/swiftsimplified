@@ -5,8 +5,7 @@ date: 2022-03-16 00:00:00
 categories: [Swift Basics]
 tags: [swift, collection, array, set, dictionary]
 ---
-
-Swift has three primary collection types — Arrays, Sets and Dictionaries. They provide us with different ways to store similar types of data together. This article covers creating, accessing and modifying these collection types through examples in code. As usual, the promise is minimum theory and maximum code.
+Swift has three primary collection types — Arrays, Sets and Dictionaries. They provide us with different ways to store similar type of data together. This article covers creating, accessing and modifying these collection type through examples in code. As usual, the promise is minimum theory and maximum code.
 
 ---
 
