@@ -6,7 +6,7 @@ categories: [Swift Generics]
 tags: [swift, enums, generics]
 ---
 
-If you often work with enums, you must have come accross situations where you need to have cases with generic associated values. Let's consider an example of an enum `Travel` -
+If you often work with enums, you must have come across situations where you need to have cases with generic associated values. Let's consider an example of an enum `Travel` -
 
 ```swift
 enum Travel {
@@ -16,7 +16,7 @@ enum Travel {
 }
 ```
 
-Now right now it is pretty straight forward that you can travel through 3 differnet routes. Let's consider a case where we also have a `Car` structure and we wanted to be able to have our road travel be able to specify a car.
+Now right now it is pretty straight forward that you can travel through 3 different routes. Let's consider a case where we also have a `Car` structure and we wanted to be able to have our road travel be able to specify a car.
 
 ```swift
 struct Car {
@@ -27,7 +27,7 @@ struct Car {
 Now let's update `Travel` - 
 
 ```swift
-struct Travel {
+enum Travel {
     case road(Car)
     case train
     case air
@@ -42,7 +42,7 @@ struct Bus {
 }
 ```
 
-Now our road travel cannot accomodate both the modes of transport without any changes to it. That's where generics come in. Generics allow us to not have to specify the concrete type in the definition and let it get inferred based on where it is instantiated from. Let's see how that would look like -
+Now our road travel cannot accommodate both the modes of transport without any changes to it. That's where generics come in. Generics allow us to not have to specify the concrete type in the definition and let it get inferred based on where it is instantiated from. Let's see how that would look like -
 
 ```swift
 enum Travel<T> {
