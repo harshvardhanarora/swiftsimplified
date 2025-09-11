@@ -6,121 +6,115 @@ categories: [Swift Generics]
 tags: [swift, enums, generics]
 ---
 
-If you often work with enums, you must have come across situations where you need to have cases with generic associated values. Let's consider an example of an enum `Travel` -
+If you often work with enums, you’ve likely needed cases with associated values that can vary by type.  Let’s model a scenario where a generic associated value represents the load state of some data.
+
+### A non-generic starting point
 
 ```swift
-enum Travel {
-    case road
-    case train
-    case air
+enum LoadState {
+    case idle
+    case loading
+    case loaded(String)
+    case failed
 }
 ```
 
-Now right now it is pretty straight forward that you can travel through 3 different routes. Let's consider a case where we also have a `Car` structure and we wanted to be able to have our road travel be able to specify a car.
+This works if you always load a String. It breaks as soon as you need to load other types (Int, User, etc.).
+
+### Make it generic where it matters
+
+We can make the payload generic and keep the same states:
 
 ```swift
-struct Car {
-    let range: Int
+enum LoadState<T> {
+    case idle
+    case loading
+    case loaded(T)
+    case failed
 }
+
+struct User { let id: Int }
+
+let number: LoadState<Int> = .loaded(42)
+let name: LoadState<String> = .loaded("Running")
+let user: LoadState<User> = .loaded(User(id: 1))
 ```
 
-Now let's update `Travel` - 
+Here, the generic `T` is “what is being loaded.” For example, `LoadState<User>.loading` means “a user is loading.”
+
+### Equatable and generic associated values
+
+If we try to make `LoadState` conform to `Equatable` directly, the compiler can’t synthesize it because `T` might not be equatable:
 
 ```swift
-enum Travel {
-    case road(Car)
-    case train
-    case air
+enum LoadState<T>: Equatable {
+    case idle
+    case loading
+    case loaded(T)
+    case failed
 }
 ```
-
-That works well for this case. What would happen if we have more than one type of vehicle that we want to specify? Let's say we also had a `Bus` -
-
-```swift
-struct Bus {
-    let range: Int
-}
-```
-
-Now our road travel cannot accommodate both the modes of transport without any changes to it. That's where generics come in. Generics allow us to not have to specify the concrete type in the definition and let it get inferred based on where it is instantiated from. Let's see how that would look like -
-
-```swift
-enum Travel<T> {
-    case road(T)
-    case train
-    case air
-}
-
-let travelByCar = Travel.road(Car(range: 300))
-let travelByBus = Travel.road(Bus(range: 500))
-```
-
-Based on how they are instantiated, Swift compiler will assign a concrete type to `travelByCar` and `travelByBus` of their respective type based on the value assigned to them. Eg. `travelByBus` would be of the type Travel<Bus>.
-
-Now let's say we wanted to make `Travel` equatable, we won't get that for free since we now have an associated value that is a generic.
-
-```swift
-enum Travel<T>: Equatable {
-    case road(T)
-    case train
-    case air
-}
-```
->  Type `Travel<T>` does not conform to protocol `Equatable`
+> Type `LoadState<T>` does not conform to protocol `Equatable`
 {: .prompt-danger}
 
-The simplest way to make this go away is to ensure that our generic `T` always conform to the `Equatable` protocol. This would mean that anytime we create any `Travel` object, we would need to specify the generic type that is equatable. This is how it would look like - 
+#### Option 1: Require `T` to be Equatable at the type declaration
 
 ```swift
-enum Travel<T: Equatable>: Equatable {
-    case road(T)
-    case train
-    case air
+enum LoadState<T: Equatable>: Equatable {
+    case idle
+    case loading
+    case loaded(T)
+    case failed
 }
 
-struct Car: Equatable {
-    let range: Int
+struct User: Equatable { let id: Int }
+
+let a = LoadState<Int>.loaded(1)
+let b = LoadState<Int>.loaded(2)
+print(a == b) // false
+```
+
+This works, but it forces every `LoadState` to use an `Equatable` payload, even when you don’t need equality.
+
+#### Option 2: Conditional conformance only when needed
+
+Keep `LoadState` generic without constraints, and add `Equatable` only when `T` is `Equatable`:
+
+```swift
+enum LoadState<T> {
+    case idle
+    case loading
+    case loaded(T)
+    case failed
 }
 
-let travelByTrain = Travel<Car>.train
+extension LoadState: Equatable where T: Equatable { }
 ```
 
-What if we don't want to always do that? What if we only want to supply an `Equatable` type if we actually want to be able to compare that enum? Let's see what we could do to get that to work with a `Walk` struct which will not conform to `Equatable`.
+Now you get equality for free only when it makes sense:
 
 ```swift
-struct Walk { }
-
-enum Travel<T> {
-    case road(T)
-    case train
-    case air
-}
-
-extension Travel: Equatable where T: Equatable { }
-
-let travelByTrain = Travel<Walk>.train
+struct User: Equatable { let id: Int }
+let u1 = LoadState<User>.loaded(User(id: 1))
+let u2 = LoadState<User>.loaded(User(id: 2))
+print(u1 == u2) // false
 ```
 
-Now what this extension does is that only make `Travel` equatable if our generic type `T` also is equatable. Let's see that in action -
+And if your payload isn’t equatable, equality isn’t available—which is exactly what we want:
 
 ```swift
-let travelByTrain = Travel<Car>.train
-let travelByAir = Travel<Car>.air
-print(travelByTrain == travelByAir)
+struct Session { }
+let s1 = LoadState<Session>.idle
+let s2 = LoadState<Session>.idle
+print(s1 == s2)
 ```
 
-This would give you `false` but no error - since `Car` is equatable this also making `Travel` equatable. Let's now try comparing similar enums when we use `Walk` instead of `Car` as the generic type - 
-
-```swift
-let travelByTrain = Travel<Walk>.train
-let travelByAir = Travel<Walk>.air
-print(travelByTrain == travelByAir)
-```
-
-> Operator function `==` required that `Walk` conform to `Equatable`
+> Operator function `==` requires that `Session` conform to `Equatable`
 {: .prompt-danger}
 
-Hopefully this has helped you understand how generics work with enums and how we can have conditional protocol conformances on the type itself based on the inferred type of the generic value associated with the enum.
+This keeps intent clear and avoids extra constraints, while still letting the compiler synthesize `Equatable` when it can.
+
+I hope this shows how to design enums with generic associated values, and how conditional conformance keeps code simple and clear.
 
 ---
 
