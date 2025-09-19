@@ -1,6 +1,6 @@
 ---
 title: Introduction to Async-Await in Swift
-description: My notes covering basics of async-await
+description: Unlock the power of Swift concurrency with this in-depth article on async/await. Learn how to write cleaner, more efficient asynchronous code, avoid common pitfalls, and improve app performance. Whether you're new to Swift concurrency or looking to refine your skills, this guide offers practical examples, best practices, and expert insights tailored for modern iOS development.
 date: 2025-09-19 00:00:00
 categories: [Concurrency]
 tags: [swift, async-await, concurrency]
