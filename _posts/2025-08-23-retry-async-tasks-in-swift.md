@@ -136,6 +136,3 @@ With this approach, you can be confident that your retry logic works as expected
 ## Conclusion
 
 Retrying async tasks is a common need, especially for network operations. By abstracting the retry logic into a generic function, you make your code more flexible and easier to test. Always make sure to test your retry logic with different scenarios to avoid surprises in production. With these patterns, your Swift code will be more resilient and easier to maintain.
-
----
-Producing and maintaining these guides takes time and resources. If you found this article helpful and would like to support future content, consider a small contribution via [Buy Me a Coffee](https://buymeacoffee.com/swiftsimplified). Contributions help cover hosting and creation costs and make it possible to keep publishing free, practical material. No pressure — sharing this post with your network or starring the project is equally appreciated. Thank you for reading.

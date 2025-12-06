@@ -148,7 +148,3 @@ Let’s go line by line to see what is happening here —
 - `Line 6` - We again call the instance method `calculateMoney` and supply 10 as an argument. This time `rateMultiplier` is set to 100 and thus we get the output 1000.
 
 This example alone should provide you a lot of insight as to how type properties and type methods work together.
-
----
-
-Producing and maintaining these guides takes time and resources. If you found this article helpful and would like to support future content, consider a small contribution via [Buy Me a Coffee](https://buymeacoffee.com/swiftsimplified). Contributions help cover hosting and creation costs and make it possible to keep publishing free, practical material. No pressure — sharing this post with your network or starring the project is equally appreciated. Thank you for reading.
