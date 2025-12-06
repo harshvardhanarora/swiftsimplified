@@ -133,4 +133,4 @@ extension AsyncSequence where Element: Comparable {
 
 This is a manual implementation to just give an understanding how to go about it doing it yourself. This was an example of `AsyncSequence` returning a single value, returning an `AsyncSequence` will work quite similarly.
 
-You don't need to go about implementing the basic extensions that you use on `Sequence` types, Swift has provided some default function extensions on `AsyncSequence` as a part of this (proposal)[https://github.com/swiftlang/swift-evolution/blob/main/proposals/0298-asyncsequence.md#asyncsequence-to-single-value]. Go check them out and try it out in a playground to get your head around it.
+You don't need to go about implementing the basic extensions that you use on `Sequence` types, Swift has provided some default function extensions on `AsyncSequence` as a part of this [proposal](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0298-asyncsequence.md#asyncsequence-functions). Go check them out and try it out in a playground to get your head around it.
