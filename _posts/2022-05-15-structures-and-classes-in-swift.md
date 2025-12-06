@@ -163,7 +163,3 @@ print(dimensionClassOne.width)
 That’s the simplified version of the difference between reference type and value type. Value types properties actually hold that values they store while reference properties hold a reference to where the data is actually stored.
 
 When assign a struct to another property, it creates a copy of that struct. While in the case of assigning a class to another property, simply the reference to the data stored is transferred to the new property which points to the same data that the original property points to.
-
----
-
-Producing and maintaining these guides takes time and resources. If you found this article helpful and would like to support future content, consider a small contribution via [Buy Me a Coffee](https://buymeacoffee.com/swiftsimplified). Contributions help cover hosting and creation costs and make it possible to keep publishing free, practical material. No pressure — sharing this post with your network or starring the project is equally appreciated. Thank you for reading.

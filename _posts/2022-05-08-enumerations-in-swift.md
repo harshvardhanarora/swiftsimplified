@@ -262,5 +262,3 @@ This is known as conforming to a `protocol`. You will learn more about this in t
 
 ---
 That’s it! That was quite a journey we covered with a lot of important concepts. Hopefully you now have a good working understanding of how enums work in Swift. Feel free to reach out to me in case you have any questions. Do follow my page to receive more articles on Swift fundamentals.
-
-Producing and maintaining these guides takes time and resources. If you found this article helpful and would like to support future content, consider a small contribution via [Buy Me a Coffee](https://buymeacoffee.com/swiftsimplified). Contributions help cover hosting and creation costs and make it possible to keep publishing free, practical material. No pressure — sharing this post with your network or starring the project is equally appreciated. Thank you for reading.

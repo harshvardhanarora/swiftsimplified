@@ -176,8 +176,4 @@ Now this would return you `5` and `10` (not always in that order) without any er
 
 So if you have multiple network calls running on separate threads and they are trying to update a common subject (true for other objects as well), this would be a clean way to ensure your code does not throw any warnings or even crash in certain rare scenarios.
 
-Now I understand that was a lot to take in, but we have finally got to the end. At this point, you should be comfortable in understanding how scheduling works in Rx and what are the best practises to undertake. Feel free to reach out to me if you have any questions!
-
----
-
-Producing and maintaining these guides takes time and resources. If you found this article helpful and would like to support future content, consider a small contribution via [Buy Me a Coffee](https://buymeacoffee.com/swiftsimplified). Contributions help cover hosting and creation costs and make it possible to keep publishing free, practical material. No pressure — sharing this post with your network or starring the project is equally appreciated. Thank you for reading.
+Now I understand that was a lot to take in, but we have finally got to the end. At this point, you should be comfortable in understanding how scheduling works in Rx and what are the best practices to undertake. Feel free to reach out to me if you have any questions!
